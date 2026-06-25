@@ -2,7 +2,6 @@ import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { createCategory } from "@/app/slices/categorySlice";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material"
 import { useState } from "react";
-import { CategoryType } from '@/type/categoryType'
 
 interface DialogType {
     openParameter : boolean,
