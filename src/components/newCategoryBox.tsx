@@ -31,7 +31,7 @@ const NewCategoryBox = ( { openParameter , openParameterSet } : DialogType )=>{
                     sx={{
                         '& .MuiInputLabel-root': {fontFamily: "Cursive" , color: '#5d2929', } ,
                         '& .MuiInput-underline:after': {borderBottomColor: '#5d2929',},
-                        '& .MuiInputLabel-root.Mui-focused': {color: '#c39696ff', },
+                        '& .MuiInputLabel-root.Mui-focused': {color: '#c39696ff', fontFamily: '"Cursive"' },
                     }}
                     slotProps={{
                          input: {

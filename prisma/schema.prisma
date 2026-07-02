@@ -25,4 +25,5 @@ model Category {
   name   String
   userId Int
   user   User   @relation(fields: [userId], references: [id])
+
 }
