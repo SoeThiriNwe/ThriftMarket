@@ -7,10 +7,12 @@ import { useSession } from "next-auth/react";
 import { sendUserInfo } from "@/app/slices/userSlice";
 import { Category } from "../../../../generated/prisma/client";
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import DeleteCategoryBox from "@/components/deleteCategoryBox";
 
 const CategoryPage = ()=>{
     const [selectedCategory, setSelectedCategory] = useState<Category>();
     const [openDialogBox, setOpenDialogBox] = useState(false);
+    const [openDeleteDialogBox , setOpenDeleteDialogBox ] =useState<boolean>(false);
     const categories = useAppSelector((store)=> store.category.values ) 
     const  { data } = useSession()
 
@@ -40,20 +42,13 @@ true ? "" : ""
                         </Box>
                     </IconButton>
                     {selectedCategory ? 
-                    <IconButton>
+                    <IconButton onClick={()=>{setOpenDeleteDialogBox(true)}}>
                         <Box sx={{ bgcolor : "#672c2cff", width : "28px", display : "flex", alignItems : "center", justifyContent : "center", height : "26px"}} >
                             <DeleteForeverRoundedIcon  sx={{fontSize : "61px"  , color : "#e9c8c8ff",   }} />
                         </Box>
                     </IconButton>
                     : <span/>
                     }
-                    {/* {selectedCategory &&
-                    <IconButton>
-                        <Box sx={{ bgcolor : "#672c2cff", width : "28px", display : "flex", alignItems : "center", justifyContent : "center", height : "26px"}} >
-                            <DeleteForeverRoundedIcon  sx={{fontSize : "61px"  , color : "#e9c8c8ff",   }} />
-                        </Box>
-                    </IconButton>
-                    } */}
                 </Box>
             </Box> 
             <Box sx={{display : "flex" , gap : "50px",   width : "100vw" , padding : "40px" }} >
@@ -72,7 +67,7 @@ true ? "" : ""
 
             </Box>
 
-
+            {selectedCategory && <DeleteCategoryBox setSelectedCategory={setSelectedCategory} deleteCateBoxOpen={openDeleteDialogBox} setdeleteCateBoxClose={setOpenDeleteDialogBox} selectedCategory={selectedCategory}/>}
             <NewCategoryBox openParameter={openDialogBox} openParameterSet={setOpenDialogBox}  />    
         </Box>
     )

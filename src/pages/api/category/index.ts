@@ -7,13 +7,16 @@ export default async function handler(
   res: NextApiResponse,
 ) {
 
-    const method = "POST";
+    const method = req.method;
     if(method === "POST"){
         const body = req.body;
         const createdCategory = await prisma.category.create({data : {name : body.name , userId : body.userId}})
         res.status(200).json({ createdCategory});
-
+    }else if( method === "DELETE" ){
+        const body = req.body;
+        if(!body.id) return res.status(400).send("Bad request")
+        const deletedCategory = await prisma.category.delete({where : {id : body.id }})
+      res.status(200).json({deletedCategory})
     }
 
-  res.status(200).json({ name: "John Doe" });
 }
