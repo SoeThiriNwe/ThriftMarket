@@ -8,9 +8,12 @@ import { sendUserInfo } from "@/app/slices/userSlice";
 import { Category } from "../../../../generated/prisma/client";
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import DeleteCategoryBox from "@/components/deleteCategoryBox";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import UpdateCategoryDialogBox from "@/components/updateCategoryBox";
 
 const CategoryPage = ()=>{
     const [selectedCategory, setSelectedCategory] = useState<Category>();
+    const [openUpdateDialogBox, setOpenUpdateDialogBox] = useState(false);
     const [openDialogBox, setOpenDialogBox] = useState(false);
     const [openDeleteDialogBox , setOpenDeleteDialogBox ] =useState<boolean>(false);
     const categories = useAppSelector((store)=> store.category.values ) 
@@ -28,12 +31,20 @@ const CategoryPage = ()=>{
         } , [data])
 
 
-true ? "" : ""
 
     return(
         <Box sx={{display : "flex", alignItems : "center",  flexDirection : "column", marginTop : "30px" }} >
             <Box sx={{alignItems : "center", display : "flex", justifyContent : "space-between", width : "100vw", paddingX : "150px"}} >
-                <span/>
+                <Box>
+                    <span/>
+
+                    {selectedCategory && 
+                        <IconButton onClick={()=>setOpenUpdateDialogBox(true)} >
+                            <BorderColorIcon sx={{fontSize : "40px" , color : "#672c2cff" }} />
+                        </IconButton> }
+
+                    
+                </Box>
                 <Box sx={{bgcolor : "#e9c8c8ff" , width : "300px" , display : "flex", alignItems : "center", flexDirection : "column", padding : "20px", borderRadius : "10px" }} ><Typography sx={{fontFamily : "cursive", fontSize : "30px", color : "#672c2cff"}}>..Category..</Typography></Box>
                 <Box sx={{display :"flex"}}>
                     <IconButton onClick={()=>{setOpenDialogBox(true)}} >
@@ -68,7 +79,8 @@ true ? "" : ""
             </Box>
 
             {selectedCategory && <DeleteCategoryBox setSelectedCategory={setSelectedCategory} deleteCateBoxOpen={openDeleteDialogBox} setdeleteCateBoxClose={setOpenDeleteDialogBox} selectedCategory={selectedCategory}/>}
-            <NewCategoryBox openParameter={openDialogBox} openParameterSet={setOpenDialogBox}  />    
+            <NewCategoryBox openParameter={openDialogBox} openParameterSet={setOpenDialogBox}  /> 
+            <UpdateCategoryDialogBox openUpdateCategory={openUpdateDialogBox} setOpenUpdateCategory={setOpenUpdateDialogBox} />   
         </Box>
     )
 }
