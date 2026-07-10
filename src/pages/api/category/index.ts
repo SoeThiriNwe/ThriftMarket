@@ -16,7 +16,11 @@ export default async function handler(
         const body = req.body;
         if(!body.id) return res.status(400).send("Bad request")
         const deletedCategory = await prisma.category.delete({where : {id : body.id }})
-      res.status(200).json({deletedCategory})
+        res.status(200).json({deletedCategory})
+    }else if (method === "PUT"){
+        const {id , categoryName} = req.body;
+        const updatedCategory = await prisma.category.update({where : { id }, data : { name : categoryName}})
+        res.status(200).json({updatedCategory})
     }
 
 }

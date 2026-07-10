@@ -62,13 +62,13 @@ const CategoryPage = ()=>{
                     }
                 </Box>
             </Box> 
-            <Box sx={{display : "flex" , gap : "50px",   width : "100vw" , padding : "40px" }} >
+            <Box sx={{display : "flex", flexWrap : "wrap" , gap : "50px",   width : "100vw" , padding : "40px" }} >
 
                 {
 
                     categories.map((eachCate)=>{return (
 
-                        <Box onClick={()=>{setSelectedCategory(eachCate)}} sx={{padding : "25px", bgcolor : "#e9c8c8ff", border : "2px solid #672c2cff", borderRadius : "10px" , cursor : "pointer"}} >
+                        <Box key={eachCate.id} onClick={()=>{setSelectedCategory(eachCate)}} sx={{padding : "25px", bgcolor : "#e9c8c8ff", boxShadow : ( eachCate.id === selectedCategory?.id ?  "0 0 40px #5e1233ff" : "none" ) , border : "2px solid #672c2cff", borderRadius : "10px" , cursor : "pointer"}} >
                             <Typography sx={{fontFamily : "cursive" ,fontSize : "23px" , color : "#672c2cff"}} >{eachCate.name}</Typography>
                         </Box>
 
@@ -80,7 +80,7 @@ const CategoryPage = ()=>{
 
             {selectedCategory && <DeleteCategoryBox setSelectedCategory={setSelectedCategory} deleteCateBoxOpen={openDeleteDialogBox} setdeleteCateBoxClose={setOpenDeleteDialogBox} selectedCategory={selectedCategory}/>}
             <NewCategoryBox openParameter={openDialogBox} openParameterSet={setOpenDialogBox}  /> 
-            <UpdateCategoryDialogBox openUpdateCategory={openUpdateDialogBox} setOpenUpdateCategory={setOpenUpdateDialogBox} />   
+            {selectedCategory &&<UpdateCategoryDialogBox openUpdateCategory={openUpdateDialogBox} setOpenUpdateCategory={setOpenUpdateDialogBox} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} />  }
         </Box>
     )
 }
