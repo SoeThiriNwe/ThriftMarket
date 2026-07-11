@@ -16,8 +16,10 @@ const NewCategoryBox = ( { openParameter , openParameterSet } : DialogType )=>{
 
     if(!userfromStore) return null;
 
-    const handleDispatchCreateCategory = ()=>{
-        dispatch(createCategory({ categoryName: categoryname , userId : userfromStore.id }))
+    const handleDispatchCreateCategory = async ()=>{
+        await dispatch(createCategory({ categoryName: categoryname , userId : userfromStore.id }))
+        openParameterSet(false)
+        setCategoryname("")
     }
     
     return(
@@ -44,7 +46,7 @@ const NewCategoryBox = ( { openParameter , openParameterSet } : DialogType )=>{
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => { handleDispatchCreateCategory() }} variant="text" sx={{color : "#672c2cff",fontFamily : "cursive"  }} >Add</Button>
+                <Button onClick={() => { handleDispatchCreateCategory() }} disabled={!categoryname} variant="text" sx={{color : "#672c2cff",fontFamily : "cursive"  }} >Add</Button>
             </DialogActions>
             </Dialog>
         </Box>

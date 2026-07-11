@@ -10,6 +10,7 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import DeleteCategoryBox from "@/components/deleteCategoryBox";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import UpdateCategoryDialogBox from "@/components/updateCategoryBox";
+import AdminSideBar from "@/components/adminSideBar";
 
 const CategoryPage = ()=>{
     const [selectedCategory, setSelectedCategory] = useState<Category>();
@@ -34,18 +35,19 @@ const CategoryPage = ()=>{
 
     return(
         <Box sx={{display : "flex", alignItems : "center",  flexDirection : "column", marginTop : "30px" }} >
-            <Box sx={{alignItems : "center", display : "flex", justifyContent : "space-between", width : "100vw", paddingX : "150px"}} >
+            <Box sx={{alignItems : "center", display : "flex", justifyContent : "space-between", width : "100vw", paddingX : "60px"}} >
                 <Box>
-                    <span/>
+                    <AdminSideBar/>
 
                     {selectedCategory && 
-                        <IconButton onClick={()=>setOpenUpdateDialogBox(true)} >
-                            <BorderColorIcon sx={{fontSize : "40px" , color : "#672c2cff" }} />
-                        </IconButton> }
-
-                    
+                    <IconButton onClick={()=>setOpenUpdateDialogBox(true)} >
+                        <BorderColorIcon sx={{fontSize : "40px" , color : "#672c2cff" }} />
+                    </IconButton> }
+    
                 </Box>
-                <Box sx={{bgcolor : "#e9c8c8ff" , width : "300px" , display : "flex", alignItems : "center", flexDirection : "column", padding : "20px", borderRadius : "10px" }} ><Typography sx={{fontFamily : "cursive", fontSize : "30px", color : "#672c2cff"}}>..Category..</Typography></Box>
+                <Box sx={{bgcolor : "#e9c8c8ff" , width : "300px" , display : "flex", alignItems : "center", flexDirection : "column", padding : "20px", borderRadius : "10px" }} >
+                    <Typography sx={{fontFamily : "cursive", fontSize : "30px", color : "#672c2cff"}}>..Category..</Typography>
+                </Box>
                 <Box sx={{display :"flex"}}>
                     <IconButton onClick={()=>{setOpenDialogBox(true)}} >
                         <Box sx={{bgcolor : "#672c2cff" , width : "40px" , height : "40px", display : "flex", alignItems : "center", justifyContent : "center"}} >
@@ -62,7 +64,7 @@ const CategoryPage = ()=>{
                     }
                 </Box>
             </Box> 
-            <Box sx={{display : "flex", flexWrap : "wrap" , gap : "50px",   width : "100vw" , padding : "40px" }} >
+            <Box sx={{display : "flex", flexWrap : "wrap" , gap : "50px",   width : "100vw" , padding : "66px" }} >
 
                 {
 
@@ -81,6 +83,7 @@ const CategoryPage = ()=>{
             {selectedCategory && <DeleteCategoryBox setSelectedCategory={setSelectedCategory} deleteCateBoxOpen={openDeleteDialogBox} setdeleteCateBoxClose={setOpenDeleteDialogBox} selectedCategory={selectedCategory}/>}
             <NewCategoryBox openParameter={openDialogBox} openParameterSet={setOpenDialogBox}  /> 
             {selectedCategory &&<UpdateCategoryDialogBox openUpdateCategory={openUpdateDialogBox} setOpenUpdateCategory={setOpenUpdateDialogBox} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} />  }
+            
         </Box>
     )
 }
